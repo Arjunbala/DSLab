@@ -26,12 +26,43 @@ int main()
                 cin>>c2[j];
             
     }
-    for(int k=0;k<=d1+d2;k++)
+    if(d1>d2)
     {
+             for(int i=d2+1;i<=d1;i++)
+                     c2[i] = 0;
+    }
+    if(d2>d1)
+    {
+             for(int i=d1+1;i<=d2;i++)
+                     c1[i] = 0;
+    }
+    cout<<"\n Product is: ";
+    for(int k=d1+d2;k>=0;--k)
+    {
+     int sum = 0; 
      for(int l=0;l<=d1;l++)
      {
-             
-     }    
+             for(int m=0;m<=d2;m++)
+             {
+                     if(l+m == k)
+                     {
+                            sum = sum + (c1[l]*c2[m]);
+                     }
+             }
+     } 
+     c[k] = sum;
+     if(sum !=0)
+     { 
+     if(k!=0)
+     { 
+        cout<<c[k]<<"x^"<<k<<"+ ";
+     }
+     else
+     {
+         cout<<c[k];   
+     }
+     }
     }
+    
     getch();
 }
