@@ -26,9 +26,12 @@ int main()
                 cin>>c2[j];
             
     }
-    for(int k=0;k<d1+d2;k++)
+    for(int k=0;k<=d1+d2;k++)
     {
-     for(int l=0;l    
+     for(int l=0;l<=d1;l++)
+     {
+             
+     }    
     }
     getch();
 }
