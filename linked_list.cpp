@@ -155,6 +155,26 @@ old->next = temp1->next;
 free(temp1);
      
 }
+
+void no_nodes()
+{
+     int n=0;
+     if(head == NULL)
+             cout<<"No nodes \n";
+     else
+     {
+         node *temp;
+         temp =(node*)malloc(sizeof(node));
+         temp = head;
+         while(temp->next !=NULL)
+         { 
+             n++;
+             temp = temp->next;
+         }   
+         n=n+1;
+         cout<<"Number of nodes is "<<n<<"\n";
+     }
+}
      
 
 void display()
@@ -173,7 +193,7 @@ int main()
 {
      int ch=1;
      head = list;
-     while(ch != 9)
+     while(ch != 10)
      {
               cout<<"\n\n1.Insert at front\n";
               cout<<"2.Insert at back\n";
@@ -182,8 +202,9 @@ int main()
               cout<<"5.Delete from front\n";
               cout<<"6.Delete from back\n";
               cout<<"7.Delete element from particular index\n";
-              cout<<"8.Display\n";
-              cout<<"9.Exit\n";
+              cout<<"8.Number of nodes\n";
+              cout<<"9.Display\n";
+              cout<<"10.Exit\n";
               cout<<"Enter your choice: ";
               cin>>ch;
               switch(ch)
@@ -210,11 +231,14 @@ int main()
                              del_index();
                              break;
                         case 8:
+                             no_nodes();
+                             break;
+                        case 9:
                              display();
                              break;
                         
                              
-                        case 9: break;
+                        case 10: break;
                         default: cout<<"\nEnter a valid choice"<<endl;
               }
      }
