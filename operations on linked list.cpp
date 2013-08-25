@@ -119,6 +119,89 @@ void insert_after_index()
 
 void insert_before_index()
 {
+     node *temp = front;
+     node *prev = new node;
+     node *ins = new node;
+     int no,index;
+     cout<<"\nEnter the number to be inserted\n";
+     cin>>no;
+     cout<<"\nEnter the position before which it is to be inserted\n";
+     cin>>index;
+     ins->data = no;
+     if(index == 1)
+     {
+              ins->next = front;
+              front = ins;
+     }
+     else
+     {
+         int i=0;
+         while(i != index-1)
+         {
+                 prev = temp;
+                 temp = temp->next;
+                 i++;
+                 if(temp == NULL)
+                 {
+                         cout<<"\nIndex out of bounds\n";
+                         return;
+                 }
+         }
+         prev->next = ins;
+         ins->next = temp;
+     }
+}
+
+void delete_index()
+{
+     int pos;
+     cout<<"\nEnter the position you wish to delete\n";
+     cin>>pos;
+     node *temp = front;
+     node *prev = new node;
+     node *after = new node;
+     int i=1;
+     if(pos == 1)
+     {
+       temp = temp->next;
+       delete front;
+       front = temp;     
+     } 
+     else
+     {
+         while(i != pos)
+         {
+                 prev = temp;
+                 temp = temp->next;
+                 i++;
+                 if(temp == NULL)
+                 {
+                         cout<<"\nIndex out of bounds\n";
+                         return;
+                 }
+         }
+         after = temp;
+         after = after->next;
+         delete temp;
+         prev->next = after;
+     }
+}
+
+void number_nodes()
+{
+     node *temp = front;
+     if( temp == NULL)
+       cout<<"\nNumber of nodes is: 0\n";
+     else
+     {
+         int i=0;
+         while(temp != NULL)
+         {
+                    i++;
+                    temp = temp->next;
+         }
+         cout<<"\nNumber of nodes is: "<<i<<"\n";
+     }
 }
 
 void display()
@@ -171,7 +254,7 @@ int main()
                             insert_after_index();
                             break;
                        case 4:
-                            //insert_before_index();
+                            insert_before_index();
                             break;
                        case 5:
                             del_begin();
@@ -180,10 +263,10 @@ int main()
                             del_end();
                             break;
                        case 7:
-                            //delete_index();
+                            delete_index();
                             break;
                        case 8:
-                            //number_nodes();
+                            number_nodes();
                             break;
                        case 9:
                             display();
