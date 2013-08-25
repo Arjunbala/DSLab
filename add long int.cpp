@@ -59,12 +59,53 @@ int main()
     cout<<"Enter number 2"<<"\n";
     cin>>n2;
     int j=strlen(n2)-1;
-    for(int i=strlen(n1)-1;i>=0;--i)
+    if(strlen(n1) == strlen(n2))
     {
+     for(int i=strlen(n1)-1;i>=0;--i)
+     {
     
-     add_no(n1[i]-48,n2[j]-48,carry); 
+      add_no(n1[i]-48,n2[j]-48,carry); 
       carry = (n1[i]+n2[j]-96)/10;   
-     --j;   
+      --j;   
+      }
+    }
+    else if (strlen(n1)>strlen(n2))
+    {
+         j = strlen(n2)-1;
+         for(int i=strlen(n1)-1;i>=0;--i)
+     {
+         if(j >= 0)
+         {
+                 add_no(n1[i]-48,n2[j]-48,carry); 
+                 carry = (n1[i]+n2[j]-96)/10;   
+                 --j;   
+         }
+         if(j < 0)
+         {
+                add_no(n1[i]-48,0,carry); 
+                 carry = (n1[i]-48)/10;   
+                 --j;   
+         }
+      }
+    }
+    else
+    {
+        j = strlen(n1)-1;
+        for(int i=strlen(n2)-1;i>=0;--i)
+     {
+         if(j >= 0)
+         {
+                 add_no(n1[i]-48,n2[j]-48,carry); 
+                 carry = (n1[i]+n2[j]-96)/10;   
+                 --j;   
+         }
+         if(j < 0)
+         {
+                add_no(n2[i]-48,0,carry); 
+                 carry = (n2[i]+0-48)/10;   
+                 --j;   
+         }
+      } 
     }
     display();
     getch();
