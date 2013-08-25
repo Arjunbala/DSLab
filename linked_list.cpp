@@ -25,22 +25,19 @@ void insert_front()
 
 void insert_back()
 {
-     int no;
-     node *temp;
-     cout<<"\nEnter the number"<<"\n";
-     cin>>no;
-     temp = head;
-     if(temp != NULL)
-     {
-             while(temp != NULL)
-                        temp = temp->next;
-     }
-     
-     temp = (node*)malloc(sizeof(node));
-     temp->data = no;
-     temp->next = NULL;
-     list=list->next;
-     list->next=temp;
+int no;     
+node *temp1;
+cout<<"Enter the number to be inserted\n";
+cin>>no;                         
+temp1=(node*)malloc(sizeof(node));  
+temp1 = head;                  
+while(temp1->next!=NULL) 
+      temp1 = temp1->next;
+node *temp;                           
+temp = (node*)malloc(sizeof(node));  
+temp->data = no;                   
+temp->next = NULL;                  
+temp1->next = temp;                  
      
 }
 
@@ -175,6 +172,64 @@ void no_nodes()
          cout<<"Number of nodes is "<<n<<"\n";
      }
 }
+
+void split()
+{
+     int pos,i;
+     cout<<"Enter the position where you want to split\n";
+     cin>>pos;
+     node *list1 = (node*)malloc(sizeof(node));
+     node *list2 = (node*)malloc(sizeof(node));
+     node *temp1 = (node*)malloc(sizeof(node));
+     node *head1 = (node*)malloc(sizeof(node));
+     node *head2 = (node*)malloc(sizeof(node));
+     head1 = list1;
+     head2 = list2;
+     temp1 = head;
+     i=0;
+     while(temp1 != NULL)
+     {
+       if(i<=pos)
+       {
+                 cout<<i;
+                  
+                 list1 = list1->next;
+                 node *temp;                           
+                 temp = (node*)malloc(sizeof(node));  
+                 temp->data = temp1->data;                   
+                 temp->next = NULL;                  
+                 list1->next = temp; 
+       }
+       else
+       {
+           
+                 list2 = list1->next;
+                 node *temp;                           
+                 temp = (node*)malloc(sizeof(node));  
+                 temp->data = temp1->data;                   
+                 temp->next = NULL;                  
+                 list2->next = temp; 
+       }
+        i=i+1;                       
+        temp1 = temp1->next;
+     }     
+     cout<<"\n";
+     node *temp5 = (node*)malloc(sizeof(node));
+     temp5 = head1;
+     while(temp5 != NULL)
+     {
+                 cout<<temp5->data<<" ";
+                 temp5 = temp5->next;
+     }
+     cout<<"\n";
+     node *temp6 = (node*)malloc(sizeof(node));
+     temp6 = head2;
+     while(temp6 != NULL)
+     {
+                 cout<<temp6->data<<" ";
+                 temp6 = temp6->next;
+     }
+}
      
 
 void display()
@@ -193,7 +248,7 @@ int main()
 {
      int ch=1;
      head = list;
-     while(ch != 10)
+     while(ch != 11)
      {
               cout<<"\n\n1.Insert at front\n";
               cout<<"2.Insert at back\n";
@@ -203,8 +258,9 @@ int main()
               cout<<"6.Delete from back\n";
               cout<<"7.Delete element from particular index\n";
               cout<<"8.Number of nodes\n";
-              cout<<"9.Display\n";
-              cout<<"10.Exit\n";
+              cout<<"9.Split\n";
+              cout<<"10.Display\n";
+              cout<<"11.Exit\n";
               cout<<"Enter your choice: ";
               cin>>ch;
               switch(ch)
@@ -234,11 +290,13 @@ int main()
                              no_nodes();
                              break;
                         case 9:
-                             display();
+                             split();
                              break;
                         
-                             
-                        case 10: break;
+                        case 10:
+                             display();
+                             break;     
+                        case 11: break;
                         default: cout<<"\nEnter a valid choice"<<endl;
               }
      }
