@@ -122,6 +122,33 @@ void display(node *head)
      }
 }
 
+void inorder ( node *root )
+{
+    node *p ;
+
+    p = root -> left ;
+
+    while ( p != root )
+    {
+        while ( p -> isleft == structural)
+            p = p -> left ;
+
+        printf ( "%d\t", p -> data ) ;
+
+        while ( p -> isright == threaded )
+        {
+            p = p -> right ;
+
+            if ( p == root )
+                break ;
+
+            printf ( "%d\t", p -> data ) ;
+
+        }
+        p = p -> right ;
+    }
+}
+
 int main()
 {
      int ch =1;
@@ -137,7 +164,7 @@ int main()
               {
                         case 1: insert(phead);
                                 break;
-                        case 2: display(phead);
+                        case 2: inorder(phead);
                                 break;
                         case 3: break;
                         default: cout<<"Enter a valid choice \n";

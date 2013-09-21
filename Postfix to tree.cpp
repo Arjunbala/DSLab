@@ -4,7 +4,7 @@
 #include<string.h>
 #include<ctype.h>
 #include<stdlib.h>
-#include<iomanip.h>
+#include<iomanip>
 #include<deque>
 #include<sstream>
 #include<math.h>
@@ -39,37 +39,6 @@ node* pop()
          return stack[top+1];
      }
 }
-
-/*void display(node *t,int indent = 5)
-{
-     if(t == NULL)
-     {
-          cout<<"Tree is empty\n";
-          exit(1);
-     }
-    else
-     {
-         node *temp = t;
-         if (indent) {
-            cout <<setw(indent) <<" ";
-        }
-         cout<<temp->data<<" ";
-         if(temp->left != NULL)
-         {
-          cout<<"\n";
-          display(temp->left,indent-2);
-         }
-         if(temp->right != NULL)
-         {
-          display(temp->right,indent-2);
-         }
-         if (indent) {
-            cout <<setw(indent) <<" ";
-        }
-         
-     }
-      
-}*/
 
 int maxHeight(node *p) {
   if (!p) return 0;
