@@ -15,6 +15,7 @@ struct node
        int data;
        node *left;
        node *right;
+       node *parent;
 };
 node *root = NULL;
 
@@ -100,6 +101,7 @@ void insert(node *traverse,int data)
      temp->data = data;
      temp->left = NULL;
      temp->right = NULL;
+     temp->parent = NULL;
      if(traverse == NULL)
      {
       traverse = temp;
@@ -109,8 +111,9 @@ void insert(node *traverse,int data)
      if(data < traverse->data)
      {
              if(traverse->left == NULL)
-             {
+             {             
                   traverse->left = temp;
+                  temp->parent = traverse;
                   return;
              }
              else
@@ -121,6 +124,7 @@ void insert(node *traverse,int data)
          if(traverse->right == NULL)
          {
               traverse->right = temp;
+              temp->parent = traverse;
               return;
          }
          else
@@ -128,16 +132,166 @@ void insert(node *traverse,int data)
      }
 }
 
+void del(node *temp,int data)
+{
+     if(temp == NULL)
+     {
+             cout<<"The tree is empty\n";
+             return;
+     }
+     else if(root->data == data)
+     {
+          if((root->right == NULL)&&(root->left == NULL))
+          {
+              delete(root);
+              root = NULL; 
+              return;
+          }
+          else if((root->right == NULL)&&(root->left != NULL))
+          {
+               node *suc = root->left;
+               (suc->left)->parent = suc;
+               root = suc;
+               return;
+          }
+          else if((root->right != NULL)&&(root->left == NULL))
+          {
+               node *suc = root->right;
+               (suc->right)->parent = suc;
+               root = suc;
+               return;
+          }
+          else
+          {
+              node *suc = root->right;
+              suc->left = root->left;
+              (suc->left)->parent = suc;
+              (suc->right)->parent = suc;
+              root = suc;
+              return;
+          }
+     }
+     else
+     {
+         if(temp->data == data)
+         {
+             if((temp->left == NULL)&&(temp->right == NULL))
+             {
+                 if((temp->parent)->left == temp)
+                 {
+                    (temp->parent)->left = NULL;
+                    delete temp;
+                    return;
+                 }
+                  else if((temp->parent)->right == temp)
+                 {
+                    (temp->parent)->right = NULL;
+                    delete temp;
+                    return;
+                 }
+             }
+             else if((temp->left == NULL)&&(temp->right != NULL))
+             {
+                  node *suc = temp->right;
+                  temp->right = NULL;
+                  if((temp->parent)->left == temp)
+                  {
+                   (temp->parent)->left = suc;
+                   delete temp;
+                   return;
+                  }
+                  else if((temp->parent)->right == temp)
+                  {
+                   (temp->parent)->right = suc;
+                   delete temp;
+                   return;
+                  }
+             }
+             else if((temp->right == NULL)&&(temp->left != NULL))
+             {
+                  node *suc = temp->left;
+                  temp->left = NULL;
+                  if((temp->parent)->left == temp)
+                  {
+                   (temp->parent)->left = suc;
+                   delete temp;
+                   return;
+                  }
+                  else if((temp->parent)->right == temp)
+                  {
+                   (temp->parent)->right = suc;
+                   delete temp;
+                   return;
+                  }
+             }
+             else if((temp->left != NULL)&&(temp->right != NULL))
+             {
+                  node *suc = temp->right;
+                  if(suc->left == NULL)
+                  {
+                   suc->left = temp->left;
+                  }
+                  else
+                  {
+                  while(suc->left != NULL)
+                  {
+                    suc = suc->left;
+                  }
+                  suc->left = temp->left;
+                  suc->right = temp->right;
+                  }
+                  if((temp->parent)->left == temp)
+                  {
+                     (temp->parent)->left = suc;
+                  }
+                  else if((temp->parent)->right == temp)
+                  {
+                     (temp->parent)->right = suc;
+                  }
+                  if((suc->parent)->left == suc)
+                  {
+                     (suc->parent)->left = NULL;
+                  }
+                  else if((suc->parent)->right == suc)
+                  {
+                     (suc->parent)->right = NULL;
+                  }
+                  delete temp;
+                  return;
+             }
+         }
+         if((data < temp->data)&&(temp->left != NULL))
+         {
+                  del(temp->left,data);
+         }
+         if((data < temp->data)&&(temp->left == NULL))
+         {
+                  cout<<"Item not found\n";
+                  return;
+         }
+         if((data > temp->data)&&(temp->right != NULL))
+         {
+                  del(temp->right,data);
+         }
+         if((data > temp->data)&&(temp->right == NULL))
+         {
+                   cout<<"Item not found\n";
+                  return;
+         }
+     }
+}
+
 int main()
 {
     int ch =1,data;
-    while(ch != 3)
+    while(ch != 4)
     {
              cout<<"\n";
              cout<<"MAIN MENU\n";
              cout<<"1.Insert\n";
-             cout<<"2.Display\n";
-             cout<<"3.Exit\n";
+             cout<<"2.Delete\n";
+             cout<<"3.Display\n";
+             cout<<"4.Exit\n";
              cout<<"\nEnter your choice\n";
              cin>>ch;
              switch(ch)
@@ -148,8 +302,20 @@ int main()
                             insert(root,data);
                             break;
                        case 2:
+                            cout<<"\nEnter the data to be deleted\n";
+                            cin>>data;
+                            del(root,data);
+                            break;
+                       case 3:
                             cout<<"\n\nDisplaying..\n\n";
                             display(root);
+                            break;
+                       case 4:
+                            break;
+                       default:
+                               cout<<"\nPlease enter a valid choice\n";
              } 
     }
+    getch();
+    return 0;
 }
