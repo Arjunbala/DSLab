@@ -150,14 +150,14 @@ void del(node *temp,int data)
           else if((root->right == NULL)&&(root->left != NULL))
           {
                node *suc = root->left;
-               (suc->left)->parent = suc;
+               //(suc->left)->parent = suc;
                root = suc;
                return;
           }
           else if((root->right != NULL)&&(root->left == NULL))
           {
                node *suc = root->right;
-               (suc->right)->parent = suc;
+               //(suc->right)->parent = suc;
                root = suc;
                return;
           }
@@ -165,8 +165,8 @@ void del(node *temp,int data)
           {
               node *suc = root->right;
               suc->left = root->left;
-              (suc->left)->parent = suc;
-              (suc->right)->parent = suc;
+              //(suc->left)->parent = suc;
+              //(suc->right)->parent = suc;
               root = suc;
               return;
           }
