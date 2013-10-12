@@ -4,6 +4,15 @@
 #include<conio.h>
 using namespace std;
 
+int queue[20];
+int front = -1;
+int rear = -1;
+
+void insert(char data)
+{
+     
+}
+
 int main()
 {
     int n,n_rel;
@@ -12,6 +21,8 @@ int main()
     cin>>n;
     char nodes[n];
     int adj[n][n];
+    char visited[n];
+    int nos = 0;
     for(int i=0;i<n;i++)
     {
             for(int j=0;j<n;j++)
@@ -40,6 +51,38 @@ int main()
                     }
             }
     }
+    insert(nodes[0]);
+    visited[nos++] = nodes[0];
+    while(front != -1)
+    {
+     char ch = remove();
+     for(i=0;i<n;i++)
+     {
+        if(remove == nodes[i])
+        {
+                  int pos = i;
+        }
+     }
+     for(int j=0;j<n;j++)
+     {
+             if(adj[pos][j] == 1)
+             {
+                for(int k=0;k<nos;k++)
+                {
+                        if(visited[k] == nodes[j])
+                        {
+                            goto end;
+                        }
+                }
+                visited[nos++] = nodes[j];
+                insert(nodes[j]);
+                end:
+             }
+     }
+     }
+     cout<<"Ans: ";
+     for(int i=0;i<nos;i++)
+     cout<<visited[i]<<" ";
     cout<<"\n\nAdjagency matrix is \n";
     for(int i=0;i<n;i++)
     {
