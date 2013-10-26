@@ -4,19 +4,9 @@
 #include<conio.h>
 using namespace std;
 
-void merge(int la[],int ra[],int lsize,int rsize)
+void merge(int a[],int la[],int ra[],int lsize,int rsize)
 {
-     cout<<"\nLEFT Array\n";
-     for(int i=0;i<lsize;i++)
-     {
-             cout<<la[i]<<" ";
-     }
-     cout<<"\nRIGHT Array\n";
-     for(int i=0;i<rsize;i++)
-     {
-             cout<<ra[i]<<" ";
-     }
-     int a[100],i,j,k;
+     int i,j,k;
      i=0;
      j=0;
      k=0;
@@ -47,11 +37,6 @@ void merge(int la[],int ra[],int lsize,int rsize)
         k++;
         j++;
      }
-     cout<<"\nMERGED\n";
-     for(int i=0;i<k;i++)
-     {
-             cout<<a[i]<<" ";
-     }
 }
 
 void mergesort(int a[100],int n)
@@ -66,21 +51,9 @@ void mergesort(int a[100],int n)
          lsize = n/2;
          rsize = n-lsize;
          int la[lsize],ra[rsize];
-         cout<<"\nLA\n";
-         for(int i=0;i<lsize;i++)
-         {
-                 la[i]=a[i];
-                 cout<<la[i]<<" ";
-         }
-         cout<<"\nRA\n";
-         for(int i=0;i<rsize;i++)
-         {
-                 ra[i]=a[lsize+i];
-                 cout<<ra[i]<<" ";
-         }
          mergesort(la,lsize);
          mergesort(ra,rsize);
-         merge(la,ra,lsize,rsize);
+         merge(a,la,ra,lsize,rsize);
      }
 }
 
