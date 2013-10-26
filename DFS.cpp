@@ -1,41 +1,22 @@
-//Breadth First Search
+//Depth First Search
 
 #include<iostream>
 #include<conio.h>
 using namespace std;
 
-char queue[20];
-int front = -1;
-int rear = -1;
+char stack[20];
+int top = -1;
 
-void insert(char data)
+void push(char data)
 {
-     if(front == -1)
-     {
-              front = 0;
-              rear = 0;
-     }
-     
-     else
-     {
-         rear ++;
-     }
-     
-     queue[rear] = data;
-     return;
+     top = top + 1;
+     stack[top] = data;
 }
 
-char remove()
+char pop()
 {
-     char temp = queue[front];
-     if(front == rear)
-     {
-              front = -1;
-              rear = -1;
-              return(temp);
-     }
-     front = front + 1;
-     return(temp);
+     top = top - 1;
+     return(stack[top+1]);
 }
 
 int main()
@@ -76,12 +57,12 @@ int main()
                     }
             }
     }
-    insert(nodes[0]);
+    push(nodes[0]);
     nos = nos + 1;
     visited[nos] = nodes[0];
-    while(front != -1)
+    while(top != -1)
     {
-     char ch = remove();
+     char ch = pop();
      for(int i=0;i<n;i++)
      {
         if(ch == nodes[i])
@@ -102,7 +83,7 @@ int main()
                 }
                 nos = nos + 1;
                 visited[nos] = nodes[j];
-                insert(nodes[j]);
+                push(nodes[j]);
                 end:continue;
              }
      }
